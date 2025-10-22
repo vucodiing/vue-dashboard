@@ -23,7 +23,7 @@ export default {
     quotes: ['error', 'single'], // Chỉ cho phép dấu nháy đơn
     'no-unused-vars': ['error'], // Không cho phép biến không dùng
     camelcase: ['error'], // Bắt buộc đặt tên camelCase
-    'no-console': ['warn'], // Cảnh báo khi còn console.log
+    'no-console': ['error'], // Cảnh báo khi còn console.log
     '@typescript-eslint/no-explicit-any': 'warn', // Cảnh báo khi dùng any
     '@typescript-eslint/ban-ts-comment': 'off',
     'vue/multi-word-component-names': 'off', // Cho phép tên component 1 từ
