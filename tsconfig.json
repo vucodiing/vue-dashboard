@@ -1,11 +1,16 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
+  "compilerOptions": {
+    "baseUrl": ".",
+    "composite": true,
+    "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowSyntheticDefaultImports": true,
+    "types": ["node"],
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["src/*"]
     }
-  ]
+  },
+  "include": ["vite.config.*", "vitest.config.*", "cypress.config.*", "playwright.config.*"]
 }
