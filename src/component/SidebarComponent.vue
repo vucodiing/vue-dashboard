@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <div class="sidebar__logo">
-      <img :src="LOGO" alt="" height="70" />
+      <img :src="LOGO" alt="" height="50" />
       <p>DEMO <span>Admin</span></p>
     </div>
     <router-link v-for="(r, i) in arrayRouter" :key="i" :to="r.path">
@@ -25,23 +25,23 @@ onMounted(() => {
 <style scoped lang="scss">
 .sidebar {
   width: var(--sidebar-width);
-  background: #1f2a37;
-  color: #fff;
-  height: 100vh;
-  padding: var(--spacing-base);
+  // background: #1f2a37;
+  // height: 100vh;
+  color: var(--primary-dark-color);
+  padding: var(--spacing-lg);
   box-sizing: border-box;
   &__logo {
-    display: flex;
-    flex-direction: column;
-    place-items: center; /* căn giữa ngang và dọc theo flex column */
-    justify-content: center;
     font-weight: bold;
-    padding: var(--spacing-base) 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-lg);
     img {
-      margin-bottom: var(--spacing-sm);
+      margin-right: var(--spacing-sm);
     }
     p {
       font-size: var(--font-size-lg);
+      color: var(--primary-dark-color);
     }
     span {
       font-weight: 400;
@@ -61,7 +61,10 @@ onMounted(() => {
     border-radius: var(--border-base);
   }
   a.router-link-exact-active {
-    background-color: var(--primary-color);
+    background-color: rgba(87, 120, 252, 0.155);
+    border: thin solid #d0d9ff;
+    color: var(--primary-color);
+    font-weight: bold;
   }
 }
 </style>
