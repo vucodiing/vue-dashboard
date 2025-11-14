@@ -1,15 +1,34 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 
-const routes: Array<RouteRecordRaw> = [
+import DashboardLayout from '@/layout/DashboardLayout.vue';
+
+// Pages
+import Home from '@/views/HomeView.vue';
+import About from '@/views/AboutView.vue';
+
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import('@/views/HomeView.vue'),
+    component: DashboardLayout,
+    children: [
+      {
+        path: '', // trang chủ
+        name: 'DashboardHome',
+        component: Home,
+      },
+      {
+        path: 'about',
+        name: 'About',
+        component: About,
+      },
+    ],
   },
+
+  // 404
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('@/views/AboutView.vue'),
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/NotFound.vue'),
   },
 ];
 
