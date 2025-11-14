@@ -1,8 +1,8 @@
 <template>
-  <div class="dashboard-layout">
+  <div class="layout">
     <Sidebar />
 
-    <div class="content">
+    <div class="layout__content">
       <router-view />
     </div>
   </div>
@@ -12,16 +12,15 @@
 import Sidebar from '@/component/SidebarComponent.vue';
 </script>
 
-<style scoped>
-.dashboard-layout {
+<style scoped lang="scss">
+.layout {
   display: flex;
   height: 100vh;
-}
-
-.content {
-  flex: 1;
-  background: #f5f6fa;
-  padding: 20px;
-  overflow-y: auto;
+  &__content {
+    flex: 1;
+    background: var(--background-color);
+    overflow-y: auto;
+    padding: var(--spacing-base);
+  }
 }
 </style>

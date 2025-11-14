@@ -12,14 +12,22 @@ const routes: RouteRecordRaw[] = [
     component: DashboardLayout,
     children: [
       {
-        path: '', // trang chủ
-        name: 'DashboardHome',
+        path: '/', // trang chủ
+        name: 'Trang chủ',
         component: Home,
+        meta: {
+          icon: 'fa-light fa-house',
+          accessRoles: ['Admin'],
+        },
       },
       {
         path: 'about',
         name: 'About',
         component: About,
+        meta: {
+          icon: 'fa-light fa-pen',
+          accessRoles: ['Admin'],
+        },
       },
     ],
   },

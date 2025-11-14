@@ -1,22 +1,67 @@
 <template>
   <div class="sidebar">
-    <router-link to="/">Home</router-link>
-    <router-link to="/about">Settings</router-link>
+    <div class="sidebar__logo">
+      <img :src="LOGO" alt="" height="70" />
+      <p>DEMO <span>Admin</span></p>
+    </div>
+    <router-link v-for="(r, i) in arrayRouter" :key="i" :to="r.path">
+      <i v-if="r.meta?.icon" :class="`${r.meta.icon} sidebar__icon`" />
+      <span>{{ r.name }}</span>
+    </router-link>
   </div>
 </template>
 
-<style scoped>
+<script setup lang="ts">
+import { computed, onMounted } from 'vue';
+import router from '@/router/index';
+import LOGO from '@/assets/logo.png';
+const arrayRouter = computed(() => router.options.routes[0]?.children);
+
+onMounted(() => {
+  //
+});
+</script>
+
+<style scoped lang="scss">
 .sidebar {
-  width: 240px;
+  width: var(--sidebar-width);
   background: #1f2a37;
   color: #fff;
   height: 100vh;
-  padding: 20px;
+  padding: var(--spacing-base);
   box-sizing: border-box;
-}
-.sidebar a {
-  display: block;
-  color: #fff;
-  margin-bottom: 12px;
+  &__logo {
+    display: flex;
+    flex-direction: column;
+    place-items: center; /* căn giữa ngang và dọc theo flex column */
+    justify-content: center;
+    font-weight: bold;
+    padding: var(--spacing-base) 0;
+    img {
+      margin-bottom: var(--spacing-sm);
+    }
+    p {
+      font-size: var(--font-size-lg);
+    }
+    span {
+      font-weight: 400;
+      font-size: var(--font-size-base);
+    }
+  }
+  &__icon {
+    font-size: var(--font-size-lg);
+    margin-right: var(--spacing-base);
+  }
+  a {
+    display: block;
+    margin-bottom: calc(var(--spacing-sm) * 2);
+  }
+  a {
+    padding: var(--spacing-base);
+    border-radius: var(--border-base);
+  }
+  a.router-link-exact-active {
+    background-color: var(--primary-color);
+  }
 }
 </style>
