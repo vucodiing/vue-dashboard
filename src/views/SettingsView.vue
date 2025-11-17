@@ -10,9 +10,11 @@
       </div>
     </div>
     <div class="v-container__body">
-      <el-row :gutter="20">
-        <el-col :span="9"> <i class="fa-light fa-user"></i> </el-col>
-        <el-col :span="15">
+      <div class="password-form">
+        <div class="password-form__image">
+          <img :src="PASSWORD" alt="password" height="300" />
+        </div>
+        <div class="password-form__form">
           <!-- Account Info -->
           <div v-if="options === 'account__info'" class="account-info">
             <el-form style="max-width: 600px" label-width="auto">
@@ -26,44 +28,55 @@
           </div>
 
           <!-- Change Password -->
-          <div v-if="options === 'account__change__password'" class="password-form">
+          <div v-if="options === 'account__change__password'">
             <el-form
               ref="changePasswordFormRef"
               style="max-width: 600px"
               :model="changePasswordForm"
               :rules="rulesChangePassword"
               label-width="auto"
+              label-position="top"
             >
               <el-form-item label="Mật khẩu cũ" prop="passwordOld">
                 <el-input
                   v-model="changePasswordForm.passwordOld"
+                  size="large"
                   type="password"
                   placeholder="Nhập mật khẩu cũ"
                   show-password
                   autocomplete="current-password"
-                />
+                >
+                  <template #prepend><i class="fa-light fa-lock"></i></template>
+                </el-input>
               </el-form-item>
               <el-form-item label="Mật khẩu mới" prop="passwordNew">
                 <el-input
                   v-model="changePasswordForm.passwordNew"
+                  size="large"
                   type="password"
                   placeholder="Nhập mật khẩu mới"
                   show-password
                   autocomplete="new-password"
-                />
+                >
+                  <template #prepend><i class="fa-light fa-lock-keyhole"></i></template>
+                </el-input>
               </el-form-item>
               <el-form-item label="Nhập lại mật khẩu" prop="passwordRe">
                 <el-input
                   v-model="changePasswordForm.passwordRe"
+                  size="large"
                   type="password"
                   placeholder="Nhập lại mật khẩu mới"
                   show-password
                   autocomplete="new-password"
-                />
+                >
+                  <template #prepend><i class="fa-light fa-lock-keyhole"></i></template>
+                </el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="handleChangePassword">Đổi mật khẩu</el-button>
-                <el-button @click="resetForm(changePasswordFormRef)">Hủy</el-button>
+                <el-button type="primary" size="large" @click="handleChangePassword"
+                  >Đổi mật khẩu</el-button
+                >
               </el-form-item>
             </el-form>
           </div>
@@ -89,12 +102,11 @@
                 <el-button type="primary" @click="handleResetPassword"
                   >Khôi phục mật khẩu</el-button
                 >
-                <el-button @click="resetForm(resetPasswordFormRef)">Hủy</el-button>
               </el-form-item>
             </el-form>
           </div>
-        </el-col>
-      </el-row>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -103,7 +115,7 @@
 import { ref, reactive } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import { ElMessage } from 'element-plus';
-import { svPanelProps } from 'element-plus/es/components/color-picker-panel/src/props/sv-panel.mjs';
+import PASSWORD from '@/assets/password.png';
 
 const changePasswordFormRef = ref<FormInstance>();
 const resetPasswordFormRef = ref<FormInstance>();
@@ -202,10 +214,25 @@ const resetForm = (formEl: FormInstance | undefined) => {
 </script>
 
 <style lang="scss" scoped>
-.password-form,
-.account-info {
+.v-container__body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 96px); // Điều chỉnh theo chiều cao header
+}
+
+.password-form {
+  display: flex;
   width: 80%;
-  max-width: 600px;
+  max-width: 1000px;
   margin: auto;
+  &__image {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+  }
+  &__form {
+    flex: 1;
+  }
 }
 </style>
