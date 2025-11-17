@@ -32,7 +32,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'settings',
-        name: 'Cài đặt',
+        name: 'Cài đặt chung',
         component: Settings,
         meta: {
           icon: 'fa-light fa-gear',

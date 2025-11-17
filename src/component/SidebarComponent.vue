@@ -1,91 +1,128 @@
 <template>
-  <div class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar__logo">
-      <img :src="LOGO" alt="" height="50" />
+      <img :src="LOGO" alt="Logo" width="50" height="50" />
       <p>DEMO <span>Admin</span></p>
     </div>
-    <div class="sidebar__menu">
-      <router-link v-for="(r, i) in arrayRouter" :key="i" :to="r.path">
-        <i v-if="r.meta?.icon" :class="`${r.meta.icon} sidebar__icon`" />
-        <span>{{ r.name }}</span>
+
+    <nav class="sidebar__menu">
+      <router-link
+        v-for="route in menuRoutes"
+        :key="route.path"
+        :to="route.path"
+        class="sidebar__link"
+      >
+        <i v-if="route.meta?.icon" :class="[route.meta.icon, 'sidebar__icon']" />
+        <span>{{ route.name }}</span>
       </router-link>
-    </div>
+    </nav>
+
     <div class="sidebar__footer">
-      <router-link to="settings">
-        <i class="fa-light fa-gear sidebar__icon"></i>
-        <span>Cài đặt</span>
-      </router-link>
-      <!-- <router-link>
-        <i class="fa-light fa-power-off"></i>
+      <el-button type="danger" @click="handleLogout">
+        <i class="fa-regular fa-power-off sidebar__icon" />
         <span>Đăng xuất</span>
-      </router-link> -->
+      </el-button>
     </div>
-  </div>
+  </aside>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import router from '@/router/index';
 import LOGO from '@/assets/logo.png';
-const arrayRouter = computed(() => router.options.routes[0]?.children);
+import Swal from 'sweetalert2';
+const menuRoutes = computed(() => router.options.routes[0]?.children ?? []);
 
-onMounted(() => {
-  //
-});
+const handleLogout = (): void => {
+  Swal.fire({
+    title: 'Đăng xuất?',
+    text: 'Bạn sẽ đăng xuất khỏi hệ thống',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#a6a6a6',
+    confirmButtonText: 'Đăng xuất',
+    cancelButtonText: 'Hủy',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      console.log('Đăng xuất');
+    }
+  });
+};
 </script>
 
 <style scoped lang="scss">
 .sidebar {
-  width: var(--sidebar-width);
-  background: #1f2a37;
-  // height: 100vh;
-  color: var(--text-light-color);
-  padding: var(--spacing-lg);
-  box-sizing: border-box;
   position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-width);
+  height: 100vh;
+  padding: var(--spacing-lg);
+  background-color: #1f2a37;
+  color: var(--text-light-color);
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+
   &__logo {
-    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: var(--spacing-lg);
+    font-weight: 700;
+
     img {
       margin-right: var(--spacing-sm);
     }
+
     p {
       font-size: var(--font-size-lg);
-      // color: var(--primary-dark-color);
+      margin: 0;
     }
+
     span {
       font-weight: 400;
       font-size: var(--font-size-base);
     }
   }
-  &__icon {
-    font-size: var(--font-size-lg);
-    margin-right: var(--spacing-base);
+
+  &__menu {
+    flex: 1;
+    overflow-y: auto;
   }
-  &__footer {
-    position: absolute;
-    bottom: 0;
-    // left: 0;
-    width: calc(100% - var(--spacing-lg) * 2);
-    // padding: var(--spacing-lg);
-  }
-  a {
-    display: block;
-    margin-bottom: calc(var(--spacing-sm) * 2);
-  }
-  a {
+
+  &__link {
+    display: flex;
+    align-items: center;
     padding: var(--spacing-base);
+    margin-bottom: calc(var(--spacing-sm) * 2);
     border-radius: var(--border-base);
+
+    &:hover {
+      background-color: rgba(87, 120, 252, 0.1);
+    }
+
+    &.router-link-exact-active {
+      background-color: rgba(87, 120, 252, 0.155);
+      border: 1px solid #d0d9ff;
+      font-weight: bold;
+    }
   }
-  a.router-link-exact-active {
-    background-color: rgba(87, 120, 252, 0.155);
-    border: thin solid #d0d9ff;
-    // color: var(--primary-color);
-    font-weight: bold;
+
+  &__icon {
+    flex-shrink: 0;
+    margin-right: var(--spacing-base);
+    font-size: var(--font-size-lg);
+  }
+
+  &__footer {
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+    button {
+      width: 100%;
+    }
   }
 }
 </style>

@@ -2502,6 +2502,11 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+sweetalert2@^11.26.3:
+  version "11.26.3"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.26.3.tgz#6e8188cf71818af34d62fe33a2465690cde9836d"
+  integrity sha512-VU0hGw/WfI9h7Mh+SCsDlWgtxDwWZ6ccqS7QcO8zEeWnwplN1GptcLstq76OluUBSLUza6ldvKd3558OhjpJ9A==
+
 synckit@^0.11.7:
   version "0.11.11"
   resolved "https://registry.yarnpkg.com/synckit/-/synckit-0.11.11.tgz#c0b619cf258a97faa209155d9cd1699b5c998cb0"
