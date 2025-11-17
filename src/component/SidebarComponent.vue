@@ -4,10 +4,22 @@
       <img :src="LOGO" alt="" height="50" />
       <p>DEMO <span>Admin</span></p>
     </div>
-    <router-link v-for="(r, i) in arrayRouter" :key="i" :to="r.path">
-      <i v-if="r.meta?.icon" :class="`${r.meta.icon} sidebar__icon`" />
-      <span>{{ r.name }}</span>
-    </router-link>
+    <div class="sidebar__menu">
+      <router-link v-for="(r, i) in arrayRouter" :key="i" :to="r.path">
+        <i v-if="r.meta?.icon" :class="`${r.meta.icon} sidebar__icon`" />
+        <span>{{ r.name }}</span>
+      </router-link>
+    </div>
+    <div class="sidebar__footer">
+      <router-link to="settings">
+        <i class="fa-light fa-gear sidebar__icon"></i>
+        <span>Cài đặt</span>
+      </router-link>
+      <!-- <router-link>
+        <i class="fa-light fa-power-off"></i>
+        <span>Đăng xuất</span>
+      </router-link> -->
+    </div>
   </div>
 </template>
 
@@ -25,11 +37,13 @@ onMounted(() => {
 <style scoped lang="scss">
 .sidebar {
   width: var(--sidebar-width);
-  // background: #1f2a37;
+  background: #1f2a37;
   // height: 100vh;
-  color: var(--primary-dark-color);
+  color: var(--text-light-color);
   padding: var(--spacing-lg);
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
   &__logo {
     font-weight: bold;
     display: flex;
@@ -41,7 +55,7 @@ onMounted(() => {
     }
     p {
       font-size: var(--font-size-lg);
-      color: var(--primary-dark-color);
+      // color: var(--primary-dark-color);
     }
     span {
       font-weight: 400;
@@ -51,6 +65,13 @@ onMounted(() => {
   &__icon {
     font-size: var(--font-size-lg);
     margin-right: var(--spacing-base);
+  }
+  &__footer {
+    position: absolute;
+    bottom: 0;
+    // left: 0;
+    width: calc(100% - var(--spacing-lg) * 2);
+    // padding: var(--spacing-lg);
   }
   a {
     display: block;
@@ -63,7 +84,7 @@ onMounted(() => {
   a.router-link-exact-active {
     background-color: rgba(87, 120, 252, 0.155);
     border: thin solid #d0d9ff;
-    color: var(--primary-color);
+    // color: var(--primary-color);
     font-weight: bold;
   }
 }

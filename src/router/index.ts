@@ -5,6 +5,7 @@ import DashboardLayout from '@/layout/DashboardLayout.vue';
 // Pages
 import Home from '@/views/HomeView.vue';
 import About from '@/views/AboutView.vue';
+import Settings from '@/views/SettingsView.vue';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -26,6 +27,15 @@ const routes: RouteRecordRaw[] = [
         component: About,
         meta: {
           icon: 'fa-light fa-pen',
+          accessRoles: ['*'],
+        },
+      },
+      {
+        path: 'settings',
+        name: 'Cài đặt',
+        component: Settings,
+        meta: {
+          icon: 'fa-light fa-gear',
           accessRoles: ['Admin'],
         },
       },
