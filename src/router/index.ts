@@ -1,10 +1,7 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
-
 import DashboardLayout from '@/layout/DashboardLayout.vue';
-
-// Pages
 import Home from '@/views/HomeView.vue';
-import About from '@/views/AboutView.vue';
+import Users from '@/views/UsersView.vue';
 import Settings from '@/views/SettingsView.vue';
 
 const routes: RouteRecordRaw[] = [
@@ -22,12 +19,12 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: 'about',
-        name: 'About',
-        component: About,
+        path: 'users',
+        name: 'Tài khoản',
+        component: Users,
         meta: {
-          icon: 'fa-light fa-pen',
-          accessRoles: ['*'],
+          icon: 'fa-light fa-users',
+          accessRoles: ['Admin'],
         },
       },
       {
@@ -40,6 +37,13 @@ const routes: RouteRecordRaw[] = [
         },
       },
     ],
+  },
+
+  // LOGIN
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/LoginView/LoginView.vue'),
   },
 
   // 404

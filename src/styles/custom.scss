@@ -1,5 +1,5 @@
 body {
-  font-family: var(--font-family);
+  font-family: var(--font-manrope);
   background-color: var(--background-color);
   color: var(--text-dark-color);
 }
@@ -15,7 +15,7 @@ body {
     align-items: center;
     justify-content: space-between;
     border-bottom: thin solid var(--border-color);
-    min-height: 76px;
+    min-height: var(--header-height);
     h2 {
       font-weight: bold;
     }
@@ -27,5 +27,6 @@ body {
   &__body {
     overflow-y: auto;
     overflow-x: hidden;
+    height: calc(100vh - var(--header-height) - var(--spacing-lg) - var(--spacing-base));
   }
 }
