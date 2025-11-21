@@ -1,32 +1,24 @@
 body {
   font-family: var(--font-manrope);
-  background-color: var(--background-color);
-  color: var(--text-dark-color);
+  // background-color: var(--background-color);
+  // color: var(--text-dark-color);
 }
-.v-container {
-  // padding: var(--spacing-lg);
-  &__header,
-  &__body,
-  &__footer {
-    padding: var(--spacing-lg);
+button {
+  background: var(--color-primary);
+  box-shadow: 0 3px 0 #ab1322;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: var(--border-radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover {
+    opacity: 0.9;
   }
-  &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: thin solid var(--border-color);
-    min-height: var(--header-height);
-    h2 {
-      font-weight: bold;
-    }
-    p {
-      font-size: var(--font-size-sm);
-      color: var(--text-muted-color);
-    }
-  }
-  &__body {
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: calc(100vh - var(--header-height) - var(--spacing-lg) - var(--spacing-base));
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #ab1322;
   }
 }

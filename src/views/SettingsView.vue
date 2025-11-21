@@ -25,6 +25,7 @@
                 <el-input v-model="accountInfo.email" disabled />
               </el-form-item>
             </el-form>
+            <button scope="primary">Tài khoản</button>
           </div>
 
           <!-- Change Password -->
@@ -74,6 +75,8 @@
                 </el-input>
               </el-form-item>
               <div style="text-align: end">
+                <button scope="primary">Đổi mật khẩu</button>
+                <button scope="secondary">Đổi mật khẩu2</button>
                 <el-button type="primary" size="large" @click="handleChangePassword"
                   >Đổi mật khẩu</el-button
                 >

@@ -1,14 +1,32 @@
 :root {
-  --el-border-radius-base: 8px; /* button, input, card... */
-  --el-border-radius-small: 6px;
+  --el-border-radius-base: var(--border-radius-md); /* button, input, card... */
+  --el-border-radius-small: var(--border-radius-sm);
   --el-border-radius-round: 999px; /* button round */
   --el-border-radius-circle: 50%;
 }
 
 .el-segmented {
-  --el-segmented-item-selected-color: var(--el-text-color-primary);
-  --el-segmented-item-selected-bg-color: #ffd100;
+  --el-segmented-item-selected-color: var(--color-text-light);
+  --el-segmented-item-selected-bg-color: var(--color-secondary);
 }
+
 .el-form-item {
   margin-bottom: 25px;
 }
+
+// .el-button--primary {
+//   background: var(--bg-gradient-primary) !important;
+//   border-color: transparent !important;
+
+//   /* gradient animation */
+//   background-size: 200% 200% !important;
+//   background-position: left !important;
+
+//   color: #fff !important;
+//   transition: background-position 0.4s ease !important;
+// }
+
+// .el-button--primary:hover,
+// .el-button--primary:focus {
+//   background-position: right !important;
+// }
