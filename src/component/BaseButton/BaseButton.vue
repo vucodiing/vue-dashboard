@@ -1,5 +1,5 @@
 <template>
-  <button :disabled="loading || disabled" :class="['base-btn', `scope-${scope}`]" @click="onClick">
+  <button :disabled="loading || disabled" :class="['base-btn', `scope-${scope}`]">
     <span :style="{ visibility: loading ? 'hidden' : 'visible' }">
       <i v-if="icon" :class="icon"></i>
       <slot></slot>
@@ -23,42 +23,23 @@ interface Props {
   scope?: ButtonScope;
 }
 
-const VALID_SCOPES: ButtonScope[] = [
-  'primary',
-  'secondary',
-  'success',
-  'warning',
-  'danger',
-  'info',
-];
-
 const props = withDefaults(defineProps<Props>(), {
   loading: false,
   disabled: false,
   icon: undefined,
   scope: 'primary',
 });
-
-const emit = defineEmits<{
-  click: [];
-}>();
-
-const onClick = (): void => {
-  emit('click');
-};
 </script>
 
 <style scoped>
-:root {
+.base-btn {
   --color-primary: #ed2438;
   --color-secondary: #0f7ccf;
   --color-success: #22c55e;
   --color-warning: #f59e0b;
   --color-danger: #f06548;
   --color-info: #299cdb;
-}
 
-.base-btn {
   padding: 10px 16px;
   height: 40px;
   min-width: 100px;
@@ -96,33 +77,32 @@ const onClick = (): void => {
 
 /* Scope colors */
 .scope-primary {
-  background: var(--color-primary);
-  border-bottom-color: #9e0c1b;
+  --btn-color: var(--color-primary);
 }
 
 .scope-secondary {
-  background: var(--color-secondary);
-  border-bottom-color: #0a5a97;
+  --btn-color: var(--color-secondary);
 }
 
 .scope-success {
-  background: var(--color-success);
-  border-bottom-color: #15853e;
+  --btn-color: var(--color-success);
 }
 
 .scope-warning {
-  background: var(--color-warning);
-  border-bottom-color: #a86e0a;
+  --btn-color: var(--color-warning);
 }
 
 .scope-danger {
-  background: var(--color-danger);
-  border-bottom-color: #9a412f;
+  --btn-color: var(--color-danger);
 }
 
 .scope-info {
-  background: var(--color-info);
-  border-bottom-color: #1a6b96;
+  --btn-color: var(--color-info);
+}
+
+.base-btn {
+  background: var(--btn-color);
+  border-bottom-color: color-mix(in srgb, var(--btn-color), black 30%);
 }
 
 /* Loader styles */
