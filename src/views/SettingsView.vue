@@ -25,7 +25,25 @@
                 <el-input v-model="accountInfo.email" disabled />
               </el-form-item>
             </el-form>
-            <button scope="primary">Tài khoản</button>
+            <BaseButton :loading="isLoading" @click="submitForm"> Submit </BaseButton>
+            <BaseButton :loading="isLoading" scope="secondary" @click="submitForm">
+              Submit
+            </BaseButton>
+            <BaseButton
+              :loading="isLoading"
+              scope="success"
+              icon="fa-solid fa-magnifying-glass"
+              @click="submitForm"
+            >
+              Tìm kiếm nâng cao
+            </BaseButton>
+            <BaseButton :loading="isLoading" scope="warning" @click="submitForm">
+              Submit
+            </BaseButton>
+            <BaseButton :loading="isLoading" scope="info" @click="submitForm"> Submit </BaseButton>
+            <BaseButton :loading="isLoading" scope="danger" @click="submitForm">
+              Submit
+            </BaseButton>
           </div>
 
           <!-- Change Password -->
@@ -117,6 +135,18 @@ const changePasswordForm = reactive({
 const resetPasswordForm = reactive({
   email: '',
 });
+
+const isLoading = ref(false);
+const submitForm = () => {
+  isLoading.value = true;
+  setTimeout(() => {
+    isLoading.value = false;
+    ElMessage({
+      message: 'Form submitted successfully!',
+      type: 'success',
+    });
+  }, 2000);
+};
 
 const validatePasswordMatch = (_rule: any, value: string, callback: any) => {
   if (value === '') {
