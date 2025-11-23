@@ -163,7 +163,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   }
 
   &__container {
-    padding: 2rem;
+    padding: 4rem;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: var(--border-radius);
@@ -180,7 +180,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     animation: fadeOn 0.5s ease-in-out;
   }
   &__form {
-    padding: 2rem;
+    padding: 4rem;
     width: 50%;
     background-color: #fff;
     border-radius: var(--border-radius);
@@ -196,6 +196,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         font-weight: 600;
       }
     }
+  }
+  button {
+    width: 100%;
   }
 }
 
