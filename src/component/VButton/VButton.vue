@@ -1,5 +1,5 @@
 <template>
-  <button :disabled="loading || disabled" :class="['base-btn', `scope-${scope}`]">
+  <button :disabled="loading || disabled" :class="['v-btn', `scope-${scope}`]">
     <span :style="{ visibility: loading ? 'hidden' : 'visible' }">
       <i v-if="icon" :class="icon"></i>
       <slot></slot>
@@ -23,7 +23,7 @@ interface Props {
   scope?: ButtonScope;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   loading: false,
   disabled: false,
   icon: undefined,
@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <style scoped>
-.base-btn {
+.v-btn {
   --color-primary: #ed2438;
   --color-secondary: #0f7ccf;
   --color-success: #22c55e;
@@ -60,16 +60,16 @@ const props = withDefaults(defineProps<Props>(), {
     transform 0.1s ease;
 }
 
-.base-btn:disabled {
+.v-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
 
-.base-btn:not(:disabled):hover {
+.v-btn:not(:disabled):hover {
   opacity: 0.9;
 }
 
-.base-btn:not(:disabled):active {
+.v-btn:not(:disabled):active {
   transform: translateY(2px);
   border-bottom-width: 1px;
   padding-bottom: calc(10px + 2px);
@@ -100,7 +100,7 @@ const props = withDefaults(defineProps<Props>(), {
   --btn-color: var(--color-info);
 }
 
-.base-btn {
+.v-btn {
   background: var(--btn-color);
   border-bottom-color: color-mix(in srgb, var(--btn-color), black 30%);
 }

@@ -25,25 +25,19 @@
                 <el-input v-model="accountInfo.email" disabled />
               </el-form-item>
             </el-form>
-            <BaseButton :loading="isLoading" @click="submitForm"> Submit </BaseButton>
-            <BaseButton :loading="isLoading" scope="secondary" @click="submitForm">
-              Submit
-            </BaseButton>
-            <BaseButton
+            <VButton :loading="isLoading" @click="submitForm"> Submit </VButton>
+            <VButton :loading="isLoading" scope="secondary" @click="submitForm"> Submit </VButton>
+            <VButton
               :loading="isLoading"
               scope="success"
               icon="fa-solid fa-magnifying-glass"
               @click="submitForm"
             >
               Tìm kiếm nâng cao
-            </BaseButton>
-            <BaseButton :loading="isLoading" scope="warning" @click="submitForm">
-              Submit
-            </BaseButton>
-            <BaseButton :loading="isLoading" scope="info" @click="submitForm"> Submit </BaseButton>
-            <BaseButton :loading="isLoading" scope="danger" @click="submitForm">
-              Submit
-            </BaseButton>
+            </VButton>
+            <VButton :loading="isLoading" scope="warning" @click="submitForm"> Submit </VButton>
+            <VButton :loading="isLoading" scope="info" @click="submitForm"> Submit </VButton>
+            <VButton :loading="isLoading" scope="danger" @click="submitForm"> Submit </VButton>
           </div>
 
           <!-- Change Password -->
