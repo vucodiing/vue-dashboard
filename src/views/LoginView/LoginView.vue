@@ -11,7 +11,7 @@
           <img src="@/assets/logo.png" alt="logo" height="100" width="100" />
           <div class="login__form--header--text">
             <p>KIOSK Admin</p>
-            <p>Đăng nhập để truy cập trang quản trị</p>
+            <p>Quản trị KIOSK dịch vụ công</p>
           </div>
         </div>
         <el-form
@@ -46,9 +46,7 @@
           </el-form-item>
         </el-form>
       </div>
-      <div class="login__image">
-        <img src="@/assets/login.png" alt="" />
-      </div>
+      <div class="login__image"></div>
     </div>
   </div>
 </template>
@@ -95,13 +93,18 @@ const rules = reactive<FormRules>({
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  await formEl.validate((valid, _fields) => {
+  await formEl.validate((valid) => {
     if (valid) {
       loading.value = true;
       // console.log('submit!', form);
       // Simulate API call
       setTimeout(() => {
         loading.value = false;
+        localStorage.setItem('token', 'dummy-token');
+        // Redirect to home or dashboard
+        import('@/router').then(({ default: router }) => {
+          router.push('/');
+        });
       }, 2000);
     } else {
       // console.log('error submit!', fields);
@@ -171,24 +174,22 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     width: 90%;
     max-width: 1000px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
     position: relative;
     z-index: 1;
     animation: fadeOn 0.5s ease-in-out;
   }
   &__form {
-    padding: 4rem;
-    width: 50%;
+    padding: 0 2rem;
     background-color: #fff;
     border-radius: var(--border-radius);
     &--header {
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 2rem;
+      margin: 2rem 0;
     }
     &--header--text {
       p:first-child {
@@ -196,6 +197,11 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         font-weight: 600;
       }
     }
+  }
+  &__image {
+    background: url('@/assets/login.png') no-repeat center center/cover;
+    width: 100%;
+    height: 100%;
   }
   button {
     width: 100%;
