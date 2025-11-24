@@ -15,7 +15,8 @@
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "lint-staged": "lint-staged",
-    "prepare": "husky"
+    "prepare": "husky",
+    "update-api": "npx mushroom-cli update ts-code"
   },
   "lint-staged": {
     "**/*.{js,ts,vue}": [
@@ -28,7 +29,10 @@
     "pinia": "^3.0.3",
     "sweetalert2": "^11.26.3",
     "vue": "^3.5.22",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "mushroomjs": "1.2.0-alpha.5",
+    "mushroomjs-auth": "^1.1.0",
+    "mushroomjs-file": "^1.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
@@ -50,6 +54,7 @@
     "sass": "^1.93.3",
     "typescript": "~5.9.0",
     "vite": "^7.1.7",
-    "vue-tsc": "^3.1.0"
+    "vue-tsc": "^3.1.0",
+    "mushroom-cli": "^1.2.1"
   }
 }

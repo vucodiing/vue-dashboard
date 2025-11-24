@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schema.siten.vn/mushroom/mushroom-cli.json",
+  "update": {
+    "ts-code": {
+      "steps": [
+        {
+          "action": "pull",
+          "source": "https://kiosk-dvc-api.test2.siten.vn/mushroom.api.ts",
+          "destination": "./src/service/api/mushroom-api.ts"
+        }
+      ]
+    }
+  }
+}

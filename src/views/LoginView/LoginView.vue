@@ -55,6 +55,8 @@
 import { reactive, ref } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import { User, Lock } from '@element-plus/icons-vue';
+import mushroom from '@/service/api/mushroom-api';
+import router from '@/router';
 
 const ruleFormRef = ref<FormInstance>();
 const loading = ref(false);
@@ -93,21 +95,20 @@ const rules = reactive<FormRules>({
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  await formEl.validate((valid) => {
-    if (valid) {
-      loading.value = true;
-      // console.log('submit!', form);
-      // Simulate API call
-      setTimeout(() => {
-        loading.value = false;
-        localStorage.setItem('token', 'dummy-token');
-        // Redirect to home or dashboard
-        import('@/router').then(({ default: router }) => {
-          router.push('/');
-        });
-      }, 2000);
-    } else {
-      // console.log('error submit!', fields);
+  formEl.validate(async (valid) => {
+    if (!valid) {
+      return;
+    }
+    loading.value = true;
+    try {
+      const response = await mushroom.$auth.loginAsync(form.username, form.password);
+      if (response.result.token) {
+        router.push('/');
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      loading.value = false;
     }
   });
 };
