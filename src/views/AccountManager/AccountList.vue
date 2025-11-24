@@ -26,7 +26,7 @@
       </div>
       <div class="v-pagination">
         <el-pagination
-          small
+          large
           :page-sizes="tableRules.lengthMenu"
           :page-size="tableRules.limit"
           background

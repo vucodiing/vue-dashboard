@@ -13,3 +13,35 @@
 .el-form-item {
   margin-bottom: 25px;
 }
+
+.el-pagination {
+  --el-pagination-bg-color: transparent;
+  --el-pagination-text-color: var(--color-text-primary);
+  --el-pagination-button-color: var(--color-text-primary);
+  --el-pagination-button-disabled-color: var(--color-text-placeholder);
+  --el-pagination-button-bg-color: transparent;
+  --el-pagination-hover-color: var(--color-primary);
+
+  &.is-background {
+    .el-pager li:not(.is-disabled).is-active {
+      background-color: var(--color-primary);
+      color: var(--color-text-light);
+    }
+
+    .el-pager li:not(.is-disabled):hover {
+      color: var(--color-primary);
+    }
+  }
+
+  .el-pagination__sizes {
+    .el-input.is-focus .el-input__wrapper {
+      box-shadow: 0 0 0 1px var(--color-primary) inset !important;
+    }
+  }
+}
+.el-select__wrapper.is-focused {
+  box-shadow: 0 0 0 1px var(--color-primary) inset !important;
+}
+.el-select-dropdown__item.is-selected {
+  color: var(--color-primary) !important;
+}
