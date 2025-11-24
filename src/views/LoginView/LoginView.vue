@@ -57,7 +57,6 @@ import type { FormInstance, FormRules } from 'element-plus';
 import { User, Lock } from '@element-plus/icons-vue';
 import mushroom from '@/service/api/mushroom-api';
 import router from '@/router';
-
 const ruleFormRef = ref<FormInstance>();
 const loading = ref(false);
 

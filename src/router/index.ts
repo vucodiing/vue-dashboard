@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import DashboardLayout from '@/layout/DashboardLayout.vue';
 import Home from '@/views/HomeView.vue';
-import Users from '@/views/UsersView.vue';
 import Settings from '@/views/SettingsView.vue';
+import mushroom from '@/service/api/mushroom-api';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -19,9 +19,9 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: 'users',
+        path: 'account-manager',
         name: 'Tài khoản',
-        component: Users,
+        component: () => import('@/views/AccountManager/AccountList.vue'),
         meta: {
           icon: 'fa-light fa-users',
           accessRoles: ['Admin'],
@@ -60,7 +60,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem('token');
+  const tokenKey = 'mushroom.tokens[' + mushroom.$using() + ']';
+  const isAuthenticated = localStorage.getItem(tokenKey);
   if (to.name !== 'Login' && !isAuthenticated) {
     next({ name: 'Login' });
   } else {

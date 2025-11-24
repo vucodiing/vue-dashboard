@@ -3,3 +3,15 @@ body {
   // background-color: var(--background-color);
   // color: var(--text-dark-color);
 }
+.v-container {
+  padding: var(--space-sm);
+}
+.v-container__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.v-container__button {
+  display: flex;
+  gap: 1rem;
+}
