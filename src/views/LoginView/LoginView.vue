@@ -22,7 +22,13 @@
           @submit.prevent="submitForm(ruleFormRef)"
         >
           <el-form-item prop="username">
-            <el-input v-model="form.username" placeholder="Tên đăng nhập" size="large">
+            <el-input
+              v-model="form.username"
+              autofocus="true"
+              clearable
+              placeholder="Tên đăng nhập"
+              size="large"
+            >
               <template #prefix>
                 <el-icon><User /></el-icon>
               </template>
@@ -34,6 +40,7 @@
               type="password"
               placeholder="Mật khẩu"
               show-password
+              clearable
               size="large"
             >
               <template #prefix>
@@ -55,8 +62,11 @@
 import { reactive, ref } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import { User, Lock } from '@element-plus/icons-vue';
-import mushroom from '@/service/api/mushroom-api';
+import mushroom, { type MushroomError } from '@/service/api/mushroom-api';
+import { LogoutMode } from 'mushroomjs-auth';
 import router from '@/router';
+import Swal from 'sweetalert2';
+import method from '@/utils/method';
 const ruleFormRef = ref<FormInstance>();
 const loading = ref(false);
 
@@ -100,12 +110,24 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     }
     loading.value = true;
     try {
-      const response = await mushroom.$auth.loginAsync(form.username, form.password);
-      if (response.result.token) {
-        router.push('/');
+      await mushroom.$auth.loginAsync(form.username, form.password, true);
+      const { result } = await mushroom.$auth.meAsync();
+      if (!result.roles.includes('Admin')) {
+        localStorage.clear();
+        await mushroom.$auth.logoutAsync({ mode: LogoutMode.InvalidClientSession });
+        await Swal.fire({
+          title: 'Thông báo',
+          text: 'Bạn không có quyền truy cập',
+          icon: 'warning',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Đồng ý',
+          allowOutsideClick: false,
+        });
+        return;
       }
+      router.push('/');
     } catch (error) {
-      console.log(error);
+      method.showError(error as MushroomError);
     } finally {
       loading.value = false;
     }
@@ -113,121 +135,4 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 };
 </script>
 
-<style scoped lang="scss">
-.login {
-  height: 100vh;
-  align-content: center;
-  background: var(--bg-gadient-secondary);
-  position: relative;
-  overflow: hidden;
-
-  &__circles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .circle {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(4px);
-    animation: float 6s ease-in-out infinite;
-
-    &-1 {
-      width: 200px;
-      height: 200px;
-      top: 10%;
-      left: 20%;
-      animation-delay: 0s;
-    }
-
-    &-2 {
-      width: 370px;
-      height: 370px;
-      bottom: 10%;
-      right: 20%;
-      animation-delay: -2s;
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    &-3 {
-      width: 120px;
-      height: 120px;
-      bottom: 15%;
-      left: 30%;
-      animation-delay: -4s;
-      background: rgba(255, 255, 255, 0.1);
-    }
-  }
-
-  &__container {
-    padding: 4rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: var(--border-radius);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    position: relative;
-    z-index: 1;
-    animation: fadeOn 0.5s ease-in-out;
-  }
-  &__form {
-    padding: 0 2rem;
-    background-color: #fff;
-    border-radius: var(--border-radius);
-    &--header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-    &--header--text {
-      p:first-child {
-        font-size: var(--font-size-xl);
-        font-weight: 600;
-      }
-    }
-  }
-  &__image {
-    background: url('@/assets/login.png') no-repeat center center/cover;
-    width: 100%;
-    height: 100%;
-  }
-  button {
-    width: 100%;
-  }
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    transform: translateY(-20px) scale(1.1);
-  }
-  100% {
-    transform: translateY(0px) scale(1);
-  }
-}
-
-@keyframes fadeOn {
-  0% {
-    transform: translateY(20px);
-    opacity: 0.7;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-</style>
+<style scoped lang="scss" src="./LoginView.scss"></style>

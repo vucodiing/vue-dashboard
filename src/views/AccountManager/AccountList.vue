@@ -44,10 +44,11 @@
 </template>
 
 <script lang="ts" setup>
-import type { User } from '@/service/api/mushroom-api';
+import type { MushroomError, User } from '@/service/api/mushroom-api';
 import { onMounted, ref } from 'vue';
 import mushroom from '@/service/api/mushroom-api';
 import dataForm from './dataForm';
+import method from '@/utils/method';
 
 const tableData = ref<User[]>([]);
 const tableRules = dataForm.tableRules;
@@ -82,7 +83,7 @@ const fetchUserList = async () => {
     tableRules.total = Number(response?.meta?.total);
     tableRules.page = Number(response?.meta?.offset) / Number(response?.meta?.limit) + 1;
   } catch (e) {
-    console.error('Có lỗi: %o', e);
+    method.showError(e as MushroomError);
   }
 };
 
