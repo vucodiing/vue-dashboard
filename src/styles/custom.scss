@@ -1,5 +1,5 @@
 body {
-  font-family: var(--font-manrope);
+  font-family: var(--font-montserrat);
   background-color: var(--color-background);
 }
 .v-container {
@@ -26,7 +26,7 @@ body {
   overflow: hidden;
 }
 .v-table-header {
-  background-color: var(--color-secondary) !important;
-  border: thin solid var(--color-secondary) !important;
+  background-color: var(--color-primary) !important;
+  // border: thin solid var(--color-secondary) !important;
   color: var(--color-text-light);
 }

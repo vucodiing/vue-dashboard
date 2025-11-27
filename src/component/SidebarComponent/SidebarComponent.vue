@@ -56,12 +56,20 @@ const handleLogout = (): void => {
 .sidebar {
   width: 250px;
   height: 100vh;
-  background-color: #000;
+  background-color: #b6d4f61a;
   display: flex;
   flex-direction: column;
-  color: var(--color-text-light);
+  color: var(--color-text-dark);
+  padding: var(--space-md);
+  box-shadow: 3px 0 3px -3px rgba(0, 0, 0, 0.2);
+
   .router-link-exact-active {
-    background: var(--bg-gradient-primary);
+    position: relative;
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    color: var(--color-primary);
+    font-weight: bold;
+    border-radius: var(--border-radius-md);
   }
 
   &__logo {
@@ -77,26 +85,32 @@ const handleLogout = (): void => {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    gap: var(--space-sm);
   }
 
   &__link {
     display: flex;
     align-items: center;
     gap: var(--space-md);
-    padding: var(--space-md);
+    padding: var(--space-sm);
     color: var(--text-primary);
     text-decoration: none;
-    transition: all 0.3s ease;
+    // transition: all 0.3s ease;
     &:hover:not(.router-link-exact-active) {
       background-color: rgb(from var(--color-primary) r g b / 0.2);
+      border-radius: var(--border-radius-md);
     }
   }
   &__footer {
-    background: var(--bg-gadient-secondary);
+    background: var(--bg-gradient-primary);
     background-size: 200% 200%;
     background-position: left;
     transition: background-position 0.3s ease;
     padding: var(--space-sm);
+    border-radius: var(--border-radius-md);
+    color: var(--color-text-light);
+    box-shadow: var(--box-shadow);
+
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -108,7 +122,7 @@ const handleLogout = (): void => {
   }
 
   &__icon {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-lg);
   }
 }
 </style>
