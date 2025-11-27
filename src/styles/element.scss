@@ -35,13 +35,16 @@
 
   .el-pagination__sizes {
     .el-input.is-focus .el-input__wrapper {
-      box-shadow: 0 0 0 1px var(--color-primary) inset !important;
+      box-shadow: 0 0 0 1px var(--color-primary) inset;
     }
   }
 }
 .el-select__wrapper.is-focused {
-  box-shadow: 0 0 0 1px var(--color-primary) inset !important;
+  box-shadow: 0 0 0 1px var(--color-primary) inset;
 }
 .el-select-dropdown__item.is-selected {
-  color: var(--color-primary) !important;
+  color: var(--color-primary);
+}
+.el-table th.el-table__cell {
+  background-color: transparent;
 }

@@ -17,6 +17,8 @@
   --border-radius-lg: 12px;
   --border-radius: 16px;
 
+  --box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
   --color-primary: #ed2438;
   --color-secondary: #0f7ccf;
   --color-success: #22c55e;
@@ -24,7 +26,7 @@
   --color-danger: #f06548;
   --color-info: #299cdb;
   --color-text-light: #f3f3f3;
-  --bg-secondary: #4b5563;
+  --color-background: #f2f4f7;
   --bg-gradient-primary: linear-gradient(135deg, #ed2438 0%, #ff5a7e 100%);
   --bg-gadient-secondary: linear-gradient(135deg, #0f7ccf 0%, #3aa0ff 100%);
 }

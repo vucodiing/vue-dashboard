@@ -1,10 +1,9 @@
 body {
   font-family: var(--font-manrope);
-  // background-color: var(--background-color);
-  // color: var(--text-dark-color);
+  background-color: var(--color-background);
 }
 .v-container {
-  padding: var(--space-sm);
+  padding: var(--space-md);
 }
 .v-container__header {
   display: flex;
@@ -19,4 +18,15 @@ body {
   margin-top: var(--space-md);
   display: flex;
   justify-content: flex-end;
+}
+.v-table {
+  margin-top: var(--space-md);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+}
+.v-table-header {
+  background-color: var(--color-secondary) !important;
+  border: thin solid var(--color-secondary) !important;
+  color: var(--color-text-light);
 }

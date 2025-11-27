@@ -8,9 +8,9 @@
     </div>
     <div class="v-container__body">
       <div class="v-table">
-        <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="account" label="Tên tài khoản" width="180" />
-          <el-table-column label="Vai trò" width="250">
+        <el-table :data="tableData" :table-layout="'auto'" header-cell-class-name="v-table-header">
+          <el-table-column prop="account" label="Tên tài khoản" />
+          <el-table-column label="Vai trò">
             <template #default="scope">
               <div class="role-container">
                 <span
