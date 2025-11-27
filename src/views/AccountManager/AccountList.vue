@@ -108,32 +108,6 @@ const fetchUserList = async () => {
   }
 };
 
-const getRoleName = (role: string) => {
-  switch (role) {
-    case 'Admin':
-      return 'Quản trị viên';
-    case 'Commune':
-      return 'Tài khoản cán bộ Phường/Xã';
-    case 'CommuneAgent':
-      return 'Tài khoản hiển thị ở Phường/Xã';
-    default:
-      return role;
-  }
-};
-
-const getRoleColor = (role: string) => {
-  switch (role) {
-    case 'Admin':
-      return 'danger';
-    case 'Commune':
-      return 'primary';
-    case 'CommuneAgent':
-      return 'success';
-    default:
-      return 'info';
-  }
-};
-
 onMounted(async () => {
   await fetchUserList();
 });

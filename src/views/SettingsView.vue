@@ -161,13 +161,6 @@ const rulesChangePassword = reactive<FormRules>({
   passwordRe: [{ required: true, validator: validatePasswordMatch, trigger: 'blur' }],
 });
 
-const rulesResetPassword = reactive<FormRules>({
-  email: [
-    { required: true, message: 'Vui lòng nhập email', trigger: 'blur' },
-    { type: 'email', message: 'Email không hợp lệ', trigger: 'blur' },
-  ],
-});
-
 const handleChangePassword = async () => {
   if (!changePasswordFormRef.value) return;
 

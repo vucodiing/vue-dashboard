@@ -26,11 +26,12 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import mushroom from '@/service/api/mushroom-api';
 import router from '@/router/index';
 import LOGO from '@/assets/logo.png';
 import Swal from 'sweetalert2';
+import { LogoutMode } from 'mushroomjs-auth';
 const menuRoutes = computed(() => router.options.routes[0]?.children ?? []);
-
 const handleLogout = (): void => {
   Swal.fire({
     title: 'Đăng xuất?',
@@ -41,9 +42,11 @@ const handleLogout = (): void => {
     cancelButtonColor: '#a6a6a6',
     confirmButtonText: 'Đăng xuất',
     cancelButtonText: 'Hủy',
-  }).then((result) => {
+  }).then(async (result) => {
     if (result.isConfirmed) {
-      console.log('Đăng xuất');
+      localStorage.clear();
+      await mushroom.$auth.logoutAsync({ mode: LogoutMode.InvalidClientSession });
+      router.push('/login');
     }
   });
 };
