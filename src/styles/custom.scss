@@ -27,6 +27,26 @@ body {
 }
 .v-table-header {
   background-color: var(--color-primary) !important;
-  // border: thin solid var(--color-secondary) !important;
   color: var(--color-text-light);
+}
+.v-form {
+  // box-shadow: var(--box-shadow);
+  // box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  background-color: #fff;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+    p {
+      color: var(--color-warning);
+    }
+  }
 }

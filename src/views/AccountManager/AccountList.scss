@@ -1,0 +1,61 @@
+.role-container {
+  display: flex;
+  gap: 8px;
+}
+
+.role {
+  padding: 2px 8px;
+  border-radius: var(--border-radius-md);
+  font-size: 13px;
+  i {
+    margin-right: 4px;
+  }
+}
+
+.admin {
+  background-color: rgba(237, 36, 56, 0.2);
+  color: #ed2438;
+}
+
+.commune {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: var(--color-success);
+}
+
+.commune-agent {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+
+.dialog-bounce-enter-active {
+  animation: dialog-bounce-in 0.4s;
+}
+
+.dialog-bounce-leave-active {
+  animation: dialog-bounce-out 0.4s;
+}
+
+@keyframes dialog-bounce-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-bounce-out {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}

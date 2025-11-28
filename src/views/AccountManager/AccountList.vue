@@ -1,9 +1,14 @@
 <template>
-  <div class="v-container">
+  <LoadingComponent v-if="loading" />
+  <div v-else class="v-container">
+    <AccountForm ref="accountFormRef" />
     <div class="v-container__header">
       <h2><strong>DANH SÁCH TÀI KHOẢN</strong></h2>
       <div class="v-container__button">
-        <VButton>Thêm tài khoản</VButton>
+        <VButton @click="accountFormRef?.open('Thêm tài khoản')">Thêm tài khoản</VButton>
+        <VButton @click="accountFormRef?.open('Cập nhật tài khoản', '23424234')"
+          >Cập nhật tài khoản</VButton
+        >
       </div>
     </div>
     <div class="v-container__body">
@@ -83,12 +88,16 @@ import type { MushroomError, User } from '@/service/api/mushroom-api';
 import dataForm from './dataForm';
 import method from '@/utils/method';
 import AVATAR_DEFAULT from '@/assets/avatar-default.svg';
+import LoadingComponent from '@/component/LoadingComponent/LoadingComponent.vue';
+import AccountForm from './AccountForm.vue';
 interface UserList extends User {
   active: boolean;
   email: string;
   fullname: string;
   avatarUrl: string;
 }
+const loading = ref(false);
+const accountFormRef = ref<InstanceType<typeof AccountForm> | null>(null);
 
 const filterRoles = (roles: (string | null | undefined)[] | null | undefined) => {
   if (!roles) return [];
@@ -145,6 +154,7 @@ const changeData = async (data: UserList[]) => {
 };
 
 const fetchUserList = async () => {
+  loading.value = true;
   const dataFilter = {
     filters: dataForm.tableRules.filters,
     limit: dataForm.tableRules.limit,
@@ -160,6 +170,8 @@ const fetchUserList = async () => {
     tableRules.page = Number(response?.meta?.offset) / Number(response?.meta?.limit) + 1;
   } catch (e) {
     method.showError(e as MushroomError);
+  } finally {
+    loading.value = false;
   }
 };
 
@@ -168,33 +180,4 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped lang="scss">
-.role-container {
-  display: flex;
-  gap: 8px;
-}
-
-.role {
-  padding: 2px 8px;
-  border-radius: var(--border-radius-md);
-  font-size: 13px;
-  i {
-    margin-right: 4px;
-  }
-}
-
-.admin {
-  background-color: rgba(237, 36, 56, 0.2);
-  color: #ed2438;
-}
-
-.commune {
-  background-color: rgba(34, 197, 94, 0.2);
-  color: var(--color-success);
-}
-
-.commune-agent {
-  background-color: rgba(245, 158, 11, 0.2);
-  color: #f59e0b;
-}
-</style>
+<style scoped lang="scss" src="./AccountList.scss"></style>
