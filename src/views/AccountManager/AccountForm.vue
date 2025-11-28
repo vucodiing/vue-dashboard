@@ -22,6 +22,7 @@
                   v-model.trim="form.account"
                   placeholder="Nhập tài khoản"
                   autocomplete="off"
+                  size="large"
                 >
                   <template #prefix>
                     <i class="fa-light fa-user"></i>
@@ -36,6 +37,7 @@
                   type="password"
                   show-password
                   autocomplete="off"
+                  size="large"
                 >
                   <template #prefix>
                     <i class="fa-light fa-lock"></i>
@@ -55,14 +57,19 @@
                 </div>
                 <div class="v-form__body">
                   <el-form-item label="Họ tên">
-                    <el-input v-model.trim="form.fullname" placeholder="Nhập họ tên">
+                    <el-input v-model.trim="form.fullname" placeholder="Nhập họ tên" size="large">
                       <template #prefix>
                         <i class="fa-light fa-text"></i>
                       </template>
                     </el-input>
                   </el-form-item>
                   <el-form-item label="Email">
-                    <el-input v-model.trim="form.email" placeholder="Nhập địa chỉ email" clearable>
+                    <el-input
+                      v-model.trim="form.email"
+                      placeholder="Nhập địa chỉ email"
+                      clearable
+                      size="large"
+                    >
                       <template #prefix>
                         <i class="fa-light fa-envelope"></i>
                       </template>
@@ -76,6 +83,7 @@
                       v-model.trim="form.staff.booth"
                       type="text"
                       placeholder="Nhập thông tin quầy"
+                      size="large"
                     >
                       <template #prefix>
                         <i class="fa-light fa-person-booth"></i>
@@ -185,8 +193,8 @@ const createAccountAsync = async (): Promise<string | null> => {
 const handleUpdate = async () => {
   if (!formRef.value) return;
 
-  await formRef.value.validate(async (isValid) => {
-    if (!isValid) return;
+  try {
+    await formRef.value.validate();
 
     const profileData: Profile = {
       id: idUser.value,
@@ -201,14 +209,17 @@ const handleUpdate = async () => {
 
     await updateProfileAsync(profileData);
     dialogVisible.value = false;
-  });
+  } catch (error) {
+    // Validation failed
+    return;
+  }
 };
 
 const handleCreate = async () => {
   if (!formRef.value) return;
 
-  await formRef.value.validate(async (isValid) => {
-    if (!isValid) return;
+  try {
+    await formRef.value.validate();
 
     const newId = await createAccountAsync();
     if (!newId) return;
@@ -225,7 +236,11 @@ const handleCreate = async () => {
     };
 
     await updateProfileAsync(profileData);
-  });
+    dialogVisible.value = false;
+  } catch (error) {
+    // Validation failed
+    return;
+  }
 };
 </script>
 

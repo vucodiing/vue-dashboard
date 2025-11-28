@@ -11,6 +11,11 @@
   backdrop-filter: blur(4px);
 }
 
+.el-dialog__header {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .el-segmented {
   --el-segmented-item-selected-color: var(--color-text-light);
   --el-segmented-item-selected-bg-color: var(--color-secondary);
