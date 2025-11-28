@@ -1,5 +1,4 @@
-import mushroom, { defineAsyncResource } from "mushroomjs";
-import type { IMushroom, MushroomRequest, MushroomResponse, MushroomResourceBase, MushroomListResource, MushroomCountResource, MushroomFindByIdResource, MushroomCreateResource, MushroomPartialUpdateResource, MushroomDeleteResource } from "mushroomjs";
+import mushroom, { defineAsyncResource, defineAsyncView, fireEvent, createRestfulAsyncFunction, IdType, IMushroom, Mushroom, MushroomRequest, MushroomRequestSetting, MushroomRestfulRequest, MushroomResponse, MushroomResponseDataType, MushroomResourceBase, MushroomListResource, MushroomCountResource, MushroomFindByIdResource, MushroomCreateResource, MushroomBatchCreateResource, MushroomUpdateResource, MushroomBatchUpdateResource, MushroomPartialUpdateResource, MushroomDeleteResource, MushroomBatchDeleteResource, MushroomExtensibleResource, MushroomViewFunction, MushroomError, IMushroomOfflineResponse, MushroomOfflineResponse, MushroomOfflineResponseState } from "mushroomjs";
 import * as AuthExtension from "mushroomjs-auth";
 import * as FileExtension from "mushroomjs-file";
 export * from "mushroomjs";
