@@ -15,6 +15,7 @@ import SidebarComponent from '@/component/SidebarComponent/SidebarComponent.vue'
 .layout {
   height: 100vh;
   display: flex;
+  overflow: hidden;
   // padding: var(--space-md);
   // background-color: var(--bg-tertiary);
   &__content {
@@ -22,6 +23,7 @@ import SidebarComponent from '@/component/SidebarComponent/SidebarComponent.vue'
     min-width: 0;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
   }
 }
 </style>
