@@ -54,7 +54,9 @@ const handleLogout = (): void => {
 
 <style scoped lang="scss">
 .sidebar {
-  width: 250px;
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  flex-shrink: 0;
   height: 100vh;
   background-color: #b6d4f61a;
   display: flex;
