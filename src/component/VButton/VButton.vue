@@ -70,7 +70,7 @@ withDefaults(defineProps<Props>(), {
 .v-btn:not(:disabled):active {
   transform: translateY(2px);
   border-bottom-width: 1px;
-  padding-bottom: calc(10px + 2px);
+  margin-bottom: 2px;
 }
 
 /* Scope colors */
