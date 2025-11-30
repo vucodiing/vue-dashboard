@@ -6,23 +6,20 @@
       <h2><strong>DANH SÁCH TÀI KHOẢN</strong></h2>
       <div class="v-container__button">
         <VButton @click="accountFormRef?.open('Thêm tài khoản')">Thêm tài khoản</VButton>
-        <VButton @click="accountFormRef?.open('Cập nhật tài khoản', '23424234')"
-          >Cập nhật tài khoản</VButton
-        >
       </div>
     </div>
     <div class="v-container__body">
       <div class="v-table">
         <el-table
           :data="tableData"
-          :table-layout="'auto'"
           header-cell-class-name="v-table-header"
           :header-cell-style="{
             padding: '15px 0',
           }"
           :max-height="'640px'"
+          style="width: 100%"
         >
-          <el-table-column prop="fullname" label="Họ tên">
+          <el-table-column prop="fullname" label="Họ tên" min-width="300">
             <template #default="scope">
               <div style="display: flex; align-items: center; gap: 8px">
                 <el-avatar :src="scope.row.avatarUrl || AVATAR_DEFAULT" :size="40" />
@@ -30,9 +27,9 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="account" label="Tài khoản" />
+          <el-table-column prop="account" label="Tài khoản" min-width="200" />
 
-          <el-table-column label="Vai trò">
+          <el-table-column label="Vai trò" min-width="200">
             <template #default="scope">
               <div class="role-container">
                 <span
@@ -53,10 +50,15 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="email" label="Email" />
-          <el-table-column prop="active" label="Hoạt động">
+          <el-table-column prop="email" label="Email" min-width="200" />
+          <el-table-column prop="active" label="Hoạt động" align="center">
             <template #default="scope">
-              <el-switch v-model="scope.row.active" class="ml-2" />
+              <el-switch
+                v-model="scope.row.active"
+                :disabled="scope.row.roles.includes('Admin')"
+                class="ml-2"
+                @change="handleStatusChange(scope.row)"
+              />
             </template>
           </el-table-column>
         </el-table>
@@ -95,6 +97,8 @@ interface UserList extends User {
   email: string;
   fullname: string;
   avatarUrl: string;
+  avatar_id?: string;
+  staff?: { commune_id: string; booth: string };
 }
 const loading = ref(false);
 const accountFormRef = ref<InstanceType<typeof AccountForm> | null>(null);
@@ -134,6 +138,7 @@ const changeData = async (data: UserList[]) => {
     if (user) {
       user.fullname = item.fullname || '';
       user.email = item.email || '';
+      user.avatar_id = item.avatar_id || '';
       try {
         user.avatarUrl =
           mushroom.$file.linkBuilder.thumb
@@ -143,6 +148,12 @@ const changeData = async (data: UserList[]) => {
       } catch (e) {
         user.avatarUrl = '';
       }
+      if (item.staff) {
+        user.staff = {
+          commune_id: item.staff.commune_id || '',
+          booth: item.staff.booth || '',
+        };
+      }
       console.log('user', user);
     }
   });
@@ -151,6 +162,27 @@ const changeData = async (data: UserList[]) => {
   });
 
   return data;
+};
+
+const handleStatusChange = async (row: UserList) => {
+  loading.value = true;
+  try {
+    const response = await mushroom.user.partialUpdateAsync({
+      id: row.id,
+      disabled: !row.active,
+    });
+    if (response?.result) {
+      method.showNotification('Cập nhật trạng thái thành công', 'success');
+    } else {
+      method.showNotification('Cập nhật trạng thái thất bại', 'error');
+      row.active = !row.active;
+    }
+  } catch (error) {
+    method.showError(error as MushroomError);
+    row.active = !row.active;
+  } finally {
+    loading.value = false;
+  }
 };
 
 const fetchUserList = async () => {

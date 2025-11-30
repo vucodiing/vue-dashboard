@@ -40,9 +40,7 @@ withDefaults(defineProps<Props>(), {
   --color-danger: #f06548;
   --color-info: #299cdb;
 
-  padding: 10px 16px;
-  height: 40px;
-  min-width: 100px;
+  padding: 8px 16px;
   border: none;
   border-radius: 6px;
   color: white;
