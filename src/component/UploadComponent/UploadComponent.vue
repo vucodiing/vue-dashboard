@@ -16,7 +16,8 @@ import { ref } from 'vue';
 import { Plus } from '@element-plus/icons-vue';
 import type { UploadProps } from 'element-plus';
 import { ElMessage } from 'element-plus';
-import mushroom from '@/service/api/mushroom-api';
+import mushroom, { type MushroomError } from '@/service/api/mushroom-api';
+import method from '@/utils/method';
 
 const emit = defineEmits(['uploadFile']);
 const imageUrl = ref('');
@@ -28,7 +29,7 @@ const customUpload = async (options: any) => {
     imageUrl.value = URL.createObjectURL(file);
     emit('uploadFile', result.result);
   } catch (error) {
-    ElMessage.error('Upload failed');
+    method.showError(error as MushroomError);
   }
 };
 

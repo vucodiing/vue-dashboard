@@ -99,12 +99,7 @@
           </div>
         </el-col>
         <el-col :span="24" style="display: flex; justify-content: center; align-items: center">
-          <VButton v-if="!idUser" type="button" :loading="loadingButton" @click="handleCreate"
-            >Thêm mới</VButton
-          >
-          <VButton v-else type="button" :loading="loadingButton" @click="handleUpdate"
-            >Cập nhật</VButton
-          >
+          <VButton type="button" :loading="loadingButton" @click="handleCreate">Thêm mới</VButton>
         </el-col>
       </el-row>
     </el-form>
@@ -131,7 +126,6 @@ interface RuleForm {
 const dialogVisible = ref(false);
 const loadingButton = ref(false);
 const title = ref('');
-const idUser = ref('');
 const rolesUser = ref('Commune');
 const optionsRoles = ['Commune', 'CommuneAgent'];
 const formRef = ref<FormInstance>();
@@ -155,7 +149,7 @@ const rules = reactive<FormRules<RuleForm>>({
   ],
 });
 
-const open = (titleDialog: string, id?: string, data?: any) => {
+const open = (titleDialog: string) => {
   title.value = titleDialog;
   form.account = '';
   form.password = '';
@@ -196,31 +190,6 @@ const createAccountAsync = async (): Promise<string | null> => {
   } else {
     method.showNotification('Tạo tài khoản thất bại', 'error');
     return null;
-  }
-};
-
-const handleUpdate = async () => {
-  if (!formRef.value) return;
-
-  try {
-    await formRef.value.validate();
-
-    const profileData: Profile = {
-      id: idUser.value,
-      fullname: form.fullname,
-      avatar_id: form.avatar_id,
-      email: form.email,
-      staff: {
-        commune_id: form.staff.commune_id,
-        ...(rolesUser.value === 'CommuneAgent' ? { booth: form.staff.booth } : {}),
-      },
-    };
-
-    await updateProfileAsync(profileData);
-    dialogVisible.value = false;
-  } catch (error) {
-    // Validation failed
-    return;
   }
 };
 

@@ -145,7 +145,7 @@ const changeData = async (data: UserList[]) => {
             .id(item.avatar_id as string)
             .square(100)
             .build() || '';
-      } catch (e) {
+      } catch {
         user.avatarUrl = '';
       }
       if (item.staff) {
