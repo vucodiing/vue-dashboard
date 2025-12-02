@@ -5,6 +5,32 @@
   --el-border-radius-circle: 50%;
   --el-dialog-bg-color: var(--color-background);
 }
+
+// Input style
+.el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px var(--color-primary) inset;
+}
+.el-textarea__inner:focus {
+  box-shadow: 0 0 0 1px var(--color-primary) inset;
+}
+// Checkbox styles
+.el-checkbox__input.is-checked .el-checkbox__inner {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.el-checkbox__input.is-checked + .el-checkbox__label {
+  color: var(--color-primary);
+}
+
+// Radio styles
+.el-radio__input.is-checked .el-radio__inner {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.el-radio__input.is-checked + .el-radio__label {
+  color: var(--color-primary);
+}
+
 .el-overlay {
   background-color: rgba(163, 163, 163, 0.2);
   backdrop-filter: blur(4px);

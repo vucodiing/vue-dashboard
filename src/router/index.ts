@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import DashboardLayout from '@/layout/DashboardLayout.vue';
 import Home from '@/views/HomeView.vue';
-import Settings from '@/views/SettingsView.vue';
 import mushroom from '@/service/api/mushroom-api';
 
 const routes: RouteRecordRaw[] = [
@@ -28,9 +27,9 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: 'settings',
-        name: 'Cài đặt chung',
-        component: Settings,
+        path: 'system-config',
+        name: 'Cấu hình hệ thống',
+        component: () => import('@/views/SystemConfig/SystemConfigList.vue'),
         meta: {
           icon: 'fa-light fa-gear',
           accessRoles: ['Admin'],

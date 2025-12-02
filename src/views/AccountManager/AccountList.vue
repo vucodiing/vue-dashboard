@@ -51,7 +51,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="email" label="Email" min-width="200" />
-          <el-table-column prop="active" label="Hoạt động" align="center">
+          <el-table-column prop="active" label="Hoạt động" align="center" width="120">
             <template #default="scope">
               <el-switch
                 v-model="scope.row.active"
