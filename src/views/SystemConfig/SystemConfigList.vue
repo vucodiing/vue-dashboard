@@ -16,6 +16,8 @@
           :header-cell-style="{
             padding: '15px 0',
           }"
+          height="100%"
+          :max-height="'640px'"
           style="width: 100%"
         >
           <el-table-column prop="scope" label="Scope" width="120">
