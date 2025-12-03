@@ -31,6 +31,10 @@ body {
   border-radius: var(--border-radius-md);
   overflow: hidden;
   flex: 1;
+  &__action {
+    display: flex;
+    gap: 8px;
+  }
 }
 .v-table-header {
   background-color: var(--color-primary) !important;
@@ -107,4 +111,10 @@ body {
 .commune-agent {
   background-color: rgba(245, 158, 11, 0.12);
   color: #f59e0b;
+}
+
+// SweetAlert2 custom styles
+.swal2-cancel {
+  color: #5d5d5d !important;
+  background-color: #eaeaea !important;
 }

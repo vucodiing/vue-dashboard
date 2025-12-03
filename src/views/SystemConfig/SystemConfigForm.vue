@@ -40,7 +40,12 @@
       </el-form-item>
     </el-form>
     <div style="text-align: center">
-      <VButton type="button" :loading="loadingButton" @click="handleCreate">Thêm mới</VButton>
+      <VButton v-if="!form.id" type="button" :loading="loadingButton" @click="handleCreate"
+        >Thêm mới</VButton
+      >
+      <VButton v-else type="button" :loading="loadingButton" @click="handleUpdate"
+        >Cập nhật</VButton
+      >
     </div>
   </el-dialog>
 </template>
@@ -52,11 +57,13 @@ import mushroom from '@/service/api/mushroom-api';
 import type { MushroomError, System_config } from '@/service/api/mushroom-api';
 import method from '@/utils/method';
 
+const emit = defineEmits(['success']);
 const dialogVisible = ref(false);
 const loadingButton = ref(false);
 const title = ref('');
 const formRef = ref<FormInstance>();
 const form = reactive<System_config>({
+  id: '',
   scope: '',
   code: '',
   roles: [],
@@ -75,16 +82,17 @@ const rules = reactive<FormRules<System_config>>({
   code: [{ required: true, message: 'Vui lòng nhập mã cấu hình', trigger: 'blur' }],
 });
 
-const open = (titleDialog: string) => {
+const open = (titleDialog: string, data?: System_config) => {
   title.value = titleDialog;
-  form.scope = '';
-  form.code = '';
-  form.roles = [];
-  form.value = '';
-  form.note = '';
   if (formRef.value) {
     formRef.value.resetFields();
   }
+  form.id = data?.id || '';
+  form.scope = data?.scope || '';
+  form.code = data?.code || '';
+  form.roles = data?.roles || [];
+  form.value = data?.value || '';
+  form.note = data?.note || '';
   dialogVisible.value = true;
 };
 
@@ -102,9 +110,43 @@ const createSystemConfigAsync = async () => {
   });
   if (response?.result) {
     method.showNotification('Tạo cấu hình thành công', 'success');
+    emit('success');
   } else {
     method.showNotification('Tạo cấu hình thất bại', 'error');
   }
+};
+
+const updateSystemConfigAsync = async () => {
+  const response = await mushroom.system_config.partialUpdateAsync({
+    id: form.id,
+    scope: form.scope,
+    code: form.code,
+    roles: form.roles,
+    value: form.value,
+    note: form.note,
+  });
+  if (response?.result) {
+    method.showNotification('Cập nhật cấu hình thành công', 'success');
+    emit('success');
+  } else {
+    method.showNotification('Cập nhật cấu hình thất bại', 'error');
+  }
+};
+
+const handleUpdate = () => {
+  if (!formRef.value) return;
+  formRef.value.validate(async (valid) => {
+    if (!valid) return;
+    loadingButton.value = true;
+    try {
+      await updateSystemConfigAsync();
+    } catch (error) {
+      method.showError(error as MushroomError);
+    } finally {
+      loadingButton.value = false;
+      dialogVisible.value = false;
+    }
+  });
 };
 
 const handleCreate = () => {

@@ -2,7 +2,7 @@
   <aside class="sidebar">
     <div class="sidebar__logo">
       <img :src="LOGO" alt="Logo" width="50" height="50" />
-      <p>DEMO <span>Admin</span></p>
+      <p><strong>KIOSK</strong> <span>Admin</span></p>
     </div>
 
     <nav class="sidebar__menu">
@@ -79,7 +79,8 @@ const handleLogout = (): void => {
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
-    margin: var(--space-lg);
+    margin: var(--space-sm) var(--space-lg);
+    color: var(--color-primary);
   }
 
   &__menu {

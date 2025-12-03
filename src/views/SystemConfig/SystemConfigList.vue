@@ -1,7 +1,7 @@
 <template>
   <LoadingComponent v-if="loading" />
   <div v-else class="v-container">
-    <SystemConfigForm ref="systemConfigFormRef" />
+    <SystemConfigForm ref="systemConfigFormRef" @success="handleFormSuccess" />
     <div class="v-container__header">
       <h2><strong>DANH SÁCH CẤU HÌNH HỆ THỐNG</strong></h2>
       <div class="v-container__button">
@@ -20,7 +20,7 @@
           :max-height="'640px'"
           style="width: 100%"
         >
-          <el-table-column prop="scope" label="Scope" width="120">
+          <el-table-column prop="scope" label="Phạm vi" width="120">
             <template #default="{ row }">
               <span :class="`scope scope__${row.scope}`">
                 <i v-if="row.scope === 'private'" class="fa-solid fa-lock"></i>
@@ -30,7 +30,7 @@
               >
             </template>
           </el-table-column>
-          <el-table-column label="Roles" min-width="200">
+          <el-table-column label="Quyền" min-width="200">
             <template #default="scope">
               <div class="role-container">
                 <span
@@ -51,9 +51,25 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="code" label="Code" min-width="250" />
-          <el-table-column prop="value" label="Value" min-width="500" />
-          <el-table-column prop="note" label="Note" min-width="250" />
+          <el-table-column prop="code" label="Mã" min-width="250" />
+          <el-table-column prop="value" label="Giá trị" min-width="500" />
+          <el-table-column prop="note" label="Ghi chú" min-width="250" />
+          <el-table-column label="Thao tác" width="150" align="center">
+            <template #default="scope">
+              <div class="v-table__action">
+                <VButton
+                  scope="info"
+                  size="small"
+                  @click="systemConfigFormRef?.open('Cập nhật cấu hình', scope.row)"
+                >
+                  Sửa
+                </VButton>
+                <VButton scope="danger" size="small" @click="handleDelete(scope.row.id)">
+                  Xóa
+                </VButton>
+              </div>
+            </template>
+          </el-table-column>
         </el-table>
       </div>
       <div class="v-pagination">
@@ -84,6 +100,7 @@ import dataForm from './dataForm.ts';
 import method from '@/utils/method';
 import LoadingComponent from '@/component/LoadingComponent/LoadingComponent.vue';
 import SystemConfigForm from './SystemConfigForm.vue';
+import Swal from 'sweetalert2';
 
 const loading = ref(false);
 const systemConfigFormRef = ref<InstanceType<typeof SystemConfigForm> | null>(null);
@@ -128,9 +145,35 @@ const fetchSystemConfig = async () => {
   }
 };
 
+const handleDelete = async (id: string) => {
+  Swal.fire({
+    title: 'Xóa cấu hình?',
+    text: 'Bạn sẽ xóa cấu hình này',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#ed2438',
+    confirmButtonText: 'Xóa',
+    cancelButtonText: 'Hủy',
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        const res = await mushroom.system_config.deleteAsync({ id: id });
+        if (res.result === 1) {
+          method.showNotification('Xóa cấu hình thành công', 'success');
+          await fetchSystemConfig();
+        } else method.showNotification('Xóa cấu hình thất bại', 'error');
+      } catch (e) {
+        method.showError(e as MushroomError);
+      }
+    }
+  });
+};
+
+const handleFormSuccess = async () => {
+  await fetchSystemConfig();
+};
+
 onMounted(async () => {
   await fetchSystemConfig();
 });
 </script>
-
-<style scoped lang="scss" src="./SystemConfig.scss"></style>
