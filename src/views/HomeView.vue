@@ -12,19 +12,27 @@
     <div class="v-container__body">
       <div class="dashboard-grid">
         <!-- Row 1: Line Chart and Pie Chart -->
-        <div class="chart-item chart-item--large">
-          <LineChart :data="lineChartData" title="Xu hướng theo thời gian" />
+        <div class="chart-item">
+          <CardComponent title="Xu hướng theo thời gian" subtitle="Thống kê 12 tháng gần nhất">
+            <LineChart :data="lineChartData" />
+          </CardComponent>
         </div>
         <div class="chart-item">
-          <PieChart :data="pieChartData" title="Phân bổ dịch vụ" />
+          <CardComponent title="Phân bổ dịch vụ" subtitle="Tỷ lệ sử dụng các dịch vụ">
+            <PieChart :data="pieChartData" />
+          </CardComponent>
         </div>
 
         <!-- Row 2: Bar Chart and Horizontal Bar Chart -->
         <div class="chart-item">
-          <BarChart :data="barChartData" title="Thống kê theo tháng" />
+          <CardComponent title="Thống kê theo quý" subtitle="Doanh thu 4 quý trong năm">
+            <BarChart :data="barChartData" />
+          </CardComponent>
         </div>
-        <div class="chart-item chart-item--large">
-          <HorizontalBarChart :data="horizontalBarData" />
+        <div class="chart-item">
+          <CardComponent title="Xếp hạng dịch vụ" subtitle="Top dịch vụ được sử dụng nhiều nhất">
+            <HorizontalBarChart :data="horizontalBarData" />
+          </CardComponent>
         </div>
       </div>
     </div>
@@ -33,6 +41,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import CardComponent from '@/component/CardComponent/CardComponent.vue';
 import LineChart from '@/component/EchartsComponent/LineChart.vue';
 import PieChart from '@/component/EchartsComponent/PieChart.vue';
 import BarChart from '@/component/EchartsComponent/BarChart.vue';

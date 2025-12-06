@@ -122,10 +122,8 @@ const chartOption = computed(() => ({
 
 <style scoped lang="scss">
 .line-chart {
-  background: white;
-  border-radius: var(--border-radius-md);
-  padding: var(--space-lg);
-  box-shadow: var(--box-shadow);
+  height: 100%;
+  width: 100%;
 }
 
 .chart {
