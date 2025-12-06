@@ -25,12 +25,14 @@
     ]
   },
   "dependencies": {
+    "echarts": "^6.0.0",
     "element-plus": "^2.11.9",
     "mushroomjs": "1.2.0-alpha.5",
     "mushroomjs-auth": "^1.1.0",
     "mushroomjs-file": "^1.2.0",
     "sweetalert2": "^11.26.3",
     "vue": "^3.5.25",
+    "vue-echarts": "^8.0.1",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
