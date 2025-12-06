@@ -123,6 +123,8 @@ const horizontalBarData = ref([
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-lg);
+  overflow-y: auto;
+  overflow-x: hidden;
 
   @media (max-width: 1200px) {
     grid-template-columns: 1fr;
