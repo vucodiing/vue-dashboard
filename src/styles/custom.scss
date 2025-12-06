@@ -1,58 +1,80 @@
+/* ==========================================================================
+   Global Styles
+   ========================================================================== */
 body {
   font-family: var(--font-be-vietnam-pro);
   background-color: var(--color-background);
 }
+
+/* ==========================================================================
+   Layout Containers
+   ========================================================================== */
 .v-container {
   padding: var(--space-md);
-}
-.v-container__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.v-container__header-content {
-  h1 {
-    font-size: var(--font-size-lg);
-    font-weight: bold;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-content {
+      h1 {
+        font-size: var(--font-size-lg);
+        font-weight: bold;
+      }
+      p {
+        font-size: var(--font-size-md);
+        font-weight: normal;
+      }
+    }
   }
-  p {
-    font-size: var(--font-size-md);
-    font-weight: normal;
+
+  &__body {
+    margin-top: var(--space-md);
+    // Tính toán chiều cao: 100vh - padding top/bottom - header height ước tính
+    height: calc(100vh - var(--space-md) * 3 - 54px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__button {
+    display: flex;
+    gap: 1rem;
   }
 }
-.v-container__body {
-  margin-top: var(--space-md);
-  height: calc(100vh - var(--space-md) * 3 - 54px);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-.v-container__button {
-  display: flex;
-  gap: 1rem;
-}
+
+/* ==========================================================================
+   Components
+   ========================================================================== */
+
+/* Pagination */
 .v-pagination {
   margin-top: var(--space-md);
   display: flex;
   justify-content: flex-end;
 }
+
+/* Table */
 .v-table {
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius-md);
   overflow: hidden;
   flex: 1;
+
   &__action {
     display: flex;
     gap: 8px;
   }
+
+  &-header {
+    background-color: var(--color-primary) !important;
+    color: var(--color-text-light);
+  }
 }
-.v-table-header {
-  background-color: var(--color-primary) !important;
-  color: var(--color-text-light);
-}
+
+/* Form */
 .v-form {
-  // box-shadow: var(--box-shadow);
-  // box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   box-shadow:
     rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
@@ -61,37 +83,49 @@ body {
   padding: var(--space-md);
   margin-bottom: var(--space-md);
   background-color: #fff;
+
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--space-md);
+
     p {
       color: var(--color-warning);
       font-weight: bold;
     }
   }
 }
+
+/* ==========================================================================
+   Status Labels & Roles
+   ========================================================================== */
+
+/* Scope Labels */
 .scope {
   display: inline-block;
   padding: 4px 12px;
   border-radius: var(--border-radius-md);
   font-size: 12px;
   font-weight: 500;
+
   &__private {
     background-color: rgba(239, 68, 68, 0.12);
     color: #dc2626;
   }
+
   &__role {
     background-color: rgba(59, 130, 246, 0.12);
     color: #2563eb;
   }
+
   &__public {
     background-color: rgba(34, 197, 94, 0.12);
     color: #16a34a;
   }
 }
 
+/* Roles */
 .role-container {
   display: flex;
   gap: 8px;
@@ -103,11 +137,13 @@ body {
   border-radius: var(--border-radius-md);
   font-size: 12px;
   font-weight: 500;
+
   i {
     margin-right: 6px;
   }
 }
 
+/* Specific Role Colors */
 .admin {
   background-color: rgba(0, 49, 104, 0.12);
   color: #003168;
@@ -123,13 +159,17 @@ body {
   color: #f59e0b;
 }
 
-// SweetAlert2 custom styles
+/* ==========================================================================
+   Overrides & External Libs
+   ========================================================================== */
 .swal2-cancel {
   color: #5d5d5d !important;
   background-color: #eaeaea !important;
 }
 
-// Custom Scrollbar styling matches Element Plus Table
+/* ==========================================================================
+   Custom Scrollbar (Matches Element Plus style)
+   ========================================================================== */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -139,17 +179,17 @@ body {
   border-radius: 4px;
   background-color: transparent;
   transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #90939980; /* Darker gray on hover */
+  }
 }
 
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-/* Show scrollbar on hover */
+/* Show scrollbar only when hovering the container */
 *:hover::-webkit-scrollbar-thumb {
-  background-color: #9093994d; /* Light gray with transparency */
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #90939980; /* Darker gray when hovering on scrollbar */
+  background-color: #9093994d; /* Light gray transparent */
 }
