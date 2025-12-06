@@ -69,7 +69,8 @@
     }
 
     .el-pager li:not(.is-disabled):hover {
-      color: var(--color-primary);
+      background-color: color-mix(in srgb, var(--color-primary) 80%, transparent);
+      color: var(--color-text-light);
     }
   }
 
