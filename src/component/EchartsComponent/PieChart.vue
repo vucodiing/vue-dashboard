@@ -30,7 +30,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  height: '350px',
+  height: '100%',
   title: '',
   radius: () => ['40%', '70%'],
   showLabel: true,
@@ -88,7 +88,7 @@ const chartOption = computed(() => ({
 }
 
 .chart {
-  height: v-bind(height);
+  height: 100%;
   width: 100%;
 }
 </style>

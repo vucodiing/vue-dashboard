@@ -35,7 +35,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  height: '400px',
+  height: '100%',
   showLabel: true,
   primaryColor: '#003168',
   secondaryColor: '#0f7ccf',
@@ -105,7 +105,7 @@ const chartOption = computed(() => ({
 }
 
 .chart {
-  height: v-bind(height);
+  height: 100%;
   width: 100%;
 }
 </style>

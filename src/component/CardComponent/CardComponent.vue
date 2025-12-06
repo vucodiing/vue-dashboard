@@ -42,10 +42,12 @@ interface Props {
   title: string;
   subtitle?: string;
   loading?: boolean;
+  bodyHeight?: string;
 }
 
 withDefaults(defineProps<Props>(), {
   loading: false,
+  bodyHeight: '400px',
 });
 </script>
 
@@ -92,8 +94,9 @@ withDefaults(defineProps<Props>(), {
 
   &__body {
     padding: var(--space-lg);
-    flex: 1;
+    // flex: 1; // Removed flex: 1 to respect fixed height
     overflow: hidden;
+    height: v-bind(bodyHeight);
   }
 }
 
